@@ -26,6 +26,8 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 	saveAddress := address.NewSaveAddress(addressRepository)
 	saveAddressHandler := address2.NewSaveAddressHandler(saveAddress)
 
+	//BUNDLE
+
 	router := mux.NewRouter()
 	router.HandleFunc("/api/partners", getAllPartnersHandler.Handle).Methods("GET")
 	router.HandleFunc("/api/partners", savePartnerHandler.Handle).Methods("POST")

@@ -10,4 +10,5 @@ type Address struct {
 	IsDeleted   bool      `json:"is_deleted"`
 	Street      string    `json:"street"`
 	DoorNumber  int       `json:"door_number"`
+	Alias       string    `json:"alias"`
 }

@@ -13,6 +13,7 @@ type AddressDTO struct {
 	IsDeleted   bool      `json:"is_deleted"`
 	Street      string    `json:"street"`
 	DoorNumber  int64     `json:"door_number"`
+	Alias       string    `json:"alias"`
 }
 
 func FromDTOtoAddress(dto *AddressDTO) *address.Address {
@@ -24,6 +25,7 @@ func FromDTOtoAddress(dto *AddressDTO) *address.Address {
 		IsDeleted:   dto.IsDeleted,
 		Street:      dto.Street,
 		DoorNumber:  int(dto.DoorNumber),
+		Alias:       dto.Alias,
 	}
 }
 
@@ -36,5 +38,6 @@ func FromAddressToDTO(address *address.Address) *AddressDTO {
 		IsDeleted:   address.IsDeleted,
 		Street:      address.Street,
 		DoorNumber:  int64(address.DoorNumber),
+		Alias:       address.Alias,
 	}
 }
