@@ -8,7 +8,7 @@ tags:
   - name: "Partners"
     description: "partners"
   - name: "partners"
-    description: "partner endpointsCAMBIOO PRUEBA"
+    description: "partner endpoints"
 
 paths:
   /api/partners:
