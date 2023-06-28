@@ -15,7 +15,7 @@ paths:
     get:
       tags:
         - "Partners"
-      summary: "Get all partners"
+      summary: "Get all partnerss"
       description: ""
       operationId: "GetAllPartners"
       produces:
