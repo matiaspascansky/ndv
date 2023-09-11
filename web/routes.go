@@ -13,11 +13,15 @@ import (
 func routes(partnerRepository partner2.PartnerDBRepository, addressRepository address3.AddressDBRepository) *mux.Router {
 
 	//PARTNER
+	getPartnersByTypeUseCase := partner.NewGetPartnerByType(partnerRepository)
 	getAllPartnersUseCase := partner.NewGetAllPartners(partnerRepository)
-	getAllPartnersHandler := partnerWeb.NewGetAllPartnersHandler(getAllPartnersUseCase)
+	getAllPartnersHandler := partnerWeb.NewGetAllPartnersHandler(getAllPartnersUseCase, getPartnersByTypeUseCase)
 
 	savePartnerUseCase := partner.NewSavePartner(partnerRepository)
 	savePartnerHandler := partnerWeb.NewSavePartnerHandler(savePartnerUseCase)
+
+	getPartnerByIDUseCase := partner.NewGetPartnerByID(partnerRepository)
+	getPartnerByIDHandler := partnerWeb.NewGetPartnerByIDHandler(getPartnerByIDUseCase)
 
 	//ADDRESS
 	getAddressByID := address.NewGetAddressByID(addressRepository)
@@ -28,10 +32,15 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 
 	//BUNDLE
 
+	//PARTNER
 	router := mux.NewRouter()
 	router.HandleFunc("/api/partners", getAllPartnersHandler.Handle).Methods("GET")
 	router.HandleFunc("/api/partners", savePartnerHandler.Handle).Methods("POST")
+	router.HandleFunc("/api/partners/{id}", getPartnerByIDHandler.Handle).Methods("GET")
+	//ADDRESS
 	router.HandleFunc("/api/addresses/{id}", getAddressByIDHandler.Handle).Methods("GET")
+	router.HandleFunc("/api/users/{id}/address", getAddressByIDHandler.Handle).Methods("GET")
+
 	router.HandleFunc("/api/addresses", saveAddressHandler.Handle).Methods("POST")
 
 	//Partner por ID

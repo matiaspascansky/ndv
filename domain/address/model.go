@@ -5,6 +5,7 @@ import "time"
 type Address struct {
 	ID          int64
 	Name        string
+	UserID      int64
 	CreatedAt   time.Time `json:"created_at"`
 	LastUpdated time.Time `json:"last_updated"`
 	IsDeleted   bool      `json:"is_deleted"`

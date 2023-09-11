@@ -18,7 +18,7 @@ func NewAddressRepository(db *sqlx.DB) (*addressRepository, error) {
 	return &addressRepository{db: db}, nil
 }
 
-func (a addressRepository) GetById(id int64) (*address.Address, error) {
+func (a addressRepository) GetByUserId(id int64) (*address.Address, error) {
 	fmt.Println("repository: getting address by id:  ", id)
 	sqlStatement := `select id,
 		name,
@@ -28,7 +28,7 @@ func (a addressRepository) GetById(id int64) (*address.Address, error) {
 		street,
 		door_number
 		from ndv.address
-	    where id = ?;`
+	    where user_id = ?;`
 	row := a.db.QueryRow(sqlStatement, id)
 
 	var aDTO AddressDTO
@@ -47,8 +47,8 @@ func (a addressRepository) GetById(id int64) (*address.Address, error) {
 func (a addressRepository) Save(model *address.Address) (int64, error) {
 	now := time.Now().UTC()
 	aDto := FromAddressToDTO(model)
-	sqlStatement := `insert into ndv.address (name, created_at, last_updated, is_deleted,street,door_number) values (?,?,?,?,?,?)`
-	res, err := a.db.Exec(sqlStatement, aDto.Name, now, now, false, aDto.Street, aDto.DoorNumber)
+	sqlStatement := `insert into ndv.address (name, created_at, last_updated, is_deleted,street,door_number, user_id, alias) values (?,?,?,?,?,?,?,?)`
+	res, err := a.db.Exec(sqlStatement, aDto.Name, now, now, false, aDto.Street, aDto.DoorNumber, aDto.UserID, aDto.Alias)
 
 	if err != nil {
 		return 0, err

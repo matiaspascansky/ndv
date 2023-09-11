@@ -17,4 +17,5 @@ type Product struct {
 	Rating      int64             `json:"rating"`
 	CreatedAt   time.Time         `json:"created_at"`
 	LastUpdated time.Time         `json:"last_updated"`
+	PartnerID   int64             `json:"partner_id"`
 }

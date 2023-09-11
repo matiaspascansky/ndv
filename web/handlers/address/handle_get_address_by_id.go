@@ -24,7 +24,7 @@ func (g getAddressByIdHandler) Handle(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)["id"]
 	addressID, err := strconv.ParseInt(param, 10, 64)
 	if err != nil {
-		handlers.BadRequest(w, "BAD_REQUEST", "cityId.invalid")
+		handlers.BadRequest(w, "BAD_REQUEST", "id.invalid")
 		return
 	}
 	result, err := g.getAddressByID.Execute(addressID)
