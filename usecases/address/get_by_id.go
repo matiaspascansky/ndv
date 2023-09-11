@@ -25,7 +25,7 @@ func (g getAddressByID) Execute(id int64) (*address.Address, error) {
 		return nil, ErrNotFound
 	}
 
-	entity, err := g.addressRepository.GetById(id)
+	entity, err := g.addressRepository.GetByUserId(id)
 
 	if err != nil {
 		return nil, err

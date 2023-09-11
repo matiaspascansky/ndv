@@ -14,6 +14,7 @@ type AddressDTO struct {
 	Street      string    `json:"street"`
 	DoorNumber  int64     `json:"door_number"`
 	Alias       string    `json:"alias"`
+	UserID      int64     `json:"user_id"`
 }
 
 func FromDTOtoAddress(dto *AddressDTO) *address.Address {
@@ -39,5 +40,6 @@ func FromAddressToDTO(address *address.Address) *AddressDTO {
 		Street:      address.Street,
 		DoorNumber:  int64(address.DoorNumber),
 		Alias:       address.Alias,
+		UserID:      address.UserID,
 	}
 }

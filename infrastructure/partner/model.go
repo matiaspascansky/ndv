@@ -33,6 +33,7 @@ func FromDtoToPartner(dto *PartnerDTO) *partner.Partner {
 		LastUpdated: dto.LastUpdated,
 		PartnerType: dto.PartnerType,
 		IsDeleted:   dto.IsDeleted,
+		FoodType:    partner.PartnerTypeFromID(int(dto.PartnerType)),
 	}
 }
 
