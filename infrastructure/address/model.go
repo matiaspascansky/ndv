@@ -27,6 +27,7 @@ func FromDTOtoAddress(dto *AddressDTO) *address.Address {
 		Street:      dto.Street,
 		DoorNumber:  int(dto.DoorNumber),
 		Alias:       dto.Alias,
+		UserID:      dto.UserID,
 	}
 }
 

@@ -26,13 +26,14 @@ func (a addressRepository) GetByUserId(id int64) (*address.Address, error) {
 		last_updated,
 		is_deleted,
 		street,
-		door_number
+		door_number,
+		user_id
 		from ndv.address
 	    where user_id = ?;`
 	row := a.db.QueryRow(sqlStatement, id)
 
 	var aDTO AddressDTO
-	err := row.Scan(&aDTO.ID, &aDTO.Name, &aDTO.CreatedAt, &aDTO.LastUpdated, &aDTO.IsDeleted, &aDTO.Street, &aDTO.DoorNumber)
+	err := row.Scan(&aDTO.ID, &aDTO.Name, &aDTO.CreatedAt, &aDTO.LastUpdated, &aDTO.IsDeleted, &aDTO.Street, &aDTO.DoorNumber, &aDTO.UserID)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
