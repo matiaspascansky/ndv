@@ -6,6 +6,7 @@ import (
 	partner2 "ndv/infrastructure/partner"
 	"ndv/usecases/address"
 	"ndv/usecases/partner"
+	"ndv/web/handlers"
 	address2 "ndv/web/handlers/address"
 	partnerWeb "ndv/web/handlers/partner"
 )
@@ -32,9 +33,14 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 
 	//BUNDLE
 
+	//HEALTH
+	heathCheckHandler := handlers.NewHealthCheckHandler()
+
 	//PARTNER
 	router := mux.NewRouter()
 	router.HandleFunc("/api/partners", getAllPartnersHandler.Handle).Methods("GET")
+	router.HandleFunc("/", heathCheckHandler.Handle).Methods("GET")
+
 	router.HandleFunc("/api/partners", savePartnerHandler.Handle).Methods("POST")
 	router.HandleFunc("/api/partners/{id}", getPartnerByIDHandler.Handle).Methods("GET")
 	//ADDRESS
@@ -47,4 +53,8 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 	//Partner por Query
 
 	return router
+}
+
+func healthCheck() {
+
 }
