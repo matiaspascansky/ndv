@@ -1,6 +1,6 @@
 {
   "server": {
   "port": 8080,
-  "log_requests": true,
+  "log_requests": true
   }
 }
