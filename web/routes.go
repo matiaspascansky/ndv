@@ -6,6 +6,7 @@ import (
 	partner2 "ndv/infrastructure/partner"
 	"ndv/usecases/address"
 	"ndv/usecases/partner"
+	"ndv/web/handlers"
 	address2 "ndv/web/handlers/address"
 	partnerWeb "ndv/web/handlers/partner"
 )
@@ -30,6 +31,9 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 	saveAddress := address.NewSaveAddress(addressRepository)
 	saveAddressHandler := address2.NewSaveAddressHandler(saveAddress)
 
+	//HEALTH
+	heathCheckHandler := handlers.NewHealthCheckHandler()
+
 	//BUNDLE
 
 	//PARTNER
@@ -42,6 +46,8 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 	router.HandleFunc("/api/users/{id}/address", getAddressByIDHandler.Handle).Methods("GET")
 
 	router.HandleFunc("/api/addresses", saveAddressHandler.Handle).Methods("POST")
+
+	router.HandleFunc("/", heathCheckHandler.Handle).Methods("GET")
 
 	//Partner por ID
 	//Partner por Query

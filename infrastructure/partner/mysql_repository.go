@@ -3,6 +3,7 @@ package partner
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 	"ndv/domain/partner"
 	"time"
@@ -20,6 +21,8 @@ func (p partnerRepository) GetAll() ([]*partner.Partner, error) {
 	sqlStatement := `select id, name, address_id, image, phone, mail, rating,created_at,last_updated,partner_type from ndv.partners`
 	results := &sql.Rows{}
 	results, err := p.db.Query(sqlStatement)
+
+	fmt.Println("err", err)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
