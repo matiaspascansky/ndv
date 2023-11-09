@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func main() {
 	db := infrastructure.CreateLocalDataBase(datasource)
 	partnerRepo, addressRepo := initializeRepositories(db)
 
-	r := routes(partnerRepo, addressRepo)
+	r := Routes(partnerRepo, addressRepo)
 	fmt.Println("Running at port 8080")
 	http.ListenAndServe(":8080", r)
 

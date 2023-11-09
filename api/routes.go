@@ -1,6 +1,7 @@
-package main
+package handler
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	address3 "ndv/infrastructure/address"
 	partner2 "ndv/infrastructure/partner"
@@ -9,9 +10,10 @@ import (
 	"ndv/web/handlers"
 	address2 "ndv/web/handlers/address"
 	partnerWeb "ndv/web/handlers/partner"
+	"net/http"
 )
 
-func routes(partnerRepository partner2.PartnerDBRepository, addressRepository address3.AddressDBRepository) *mux.Router {
+func Routes(partnerRepository partner2.PartnerDBRepository, addressRepository address3.AddressDBRepository) *mux.Router {
 
 	//PARTNER
 	getPartnersByTypeUseCase := partner.NewGetPartnerByType(partnerRepository)
@@ -53,6 +55,10 @@ func routes(partnerRepository partner2.PartnerDBRepository, addressRepository ad
 	//Partner por Query
 
 	return router
+}
+
+func Handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
 }
 
 func healthCheck() {
